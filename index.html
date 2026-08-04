@@ -1,2139 +1,712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shugar Prestige | Beauty &amp; Wellness Salon · Paragon, Orchard Road</title>
-  <meta name="description" content="Shugar Prestige is an award-winning beauty salon at Paragon, Orchard Road, Singapore. Specialising in nails, facial, eyelash extensions, eyebrow embroidery, hair removal and kids spa." />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
-    /* =============================================
-       CSS VARIABLES
-    ============================================= */
-    :root {
-      --cream:       #FAF7F2;
-      --ivory:       #F5EFE6;
-      --rose:        #C9889A;
-      --rose-dark:   #A86070;
-      --mauve:       #7D4E5B;
-      --mauve-deep:  #5C3442;
-      --gold:        #C9A96E;
-      --gold-light:  #E2C98A;
-      --charcoal:    #3A2C30;
-      --muted:       #9A8A8D;
-      --white:       #FFFFFF;
-
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body:    'DM Sans', sans-serif;
-
-      --radius-sm:   6px;
-      --radius-md:   12px;
-      --radius-lg:   24px;
-
-      --shadow-soft: 0 4px 24px rgba(93,52,66,0.10);
-      --shadow-card: 0 8px 40px rgba(93,52,66,0.12);
-
-      --transition:  0.35s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    /* =============================================
-       RESET & BASE
-    ============================================= */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      background-color: var(--cream);
-      color: var(--charcoal);
-      font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    img { max-width: 100%; display: block; }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* =============================================
-       UTILITY
-    ============================================= */
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .section-label {
-      font-family: var(--font-body);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--mauve-deep);
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.8;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      transition: var(--transition);
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--mauve-deep);
-      color: var(--white);
-    }
-    .btn-primary:hover {
-      background: var(--mauve);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(93,52,66,0.25);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--mauve-deep);
-      border: 1.5px solid var(--mauve-deep);
-    }
-    .btn-outline:hover {
-      background: var(--mauve-deep);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--white);
-    }
-    .btn-gold:hover {
-      background: var(--gold-light);
-      color: var(--charcoal);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(201,169,110,0.30);
-    }
-
-    /* Scroll-in animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    /* =============================================
-       NAVIGATION
-    ============================================= */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 20px 0;
-      transition: var(--transition);
-    }
-
-    #navbar.scrolled {
-      background: rgba(250,247,242,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 14px 0;
-      box-shadow: 0 2px 24px rgba(93,52,66,0.08);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .nav-logo .logo-main {
-      font-family: var(--font-display);
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--mauve-deep);
-      letter-spacing: 0.04em;
-    }
-    .nav-logo .logo-sub {
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 36px;
-      align-items: center;
-    }
-    .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--charcoal);
-      transition: color var(--transition);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1.5px;
-      background: var(--gold);
-      transition: width var(--transition);
-    }
-    .nav-links a:hover { color: var(--mauve-deep); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      background: var(--mauve-deep);
-      color: var(--white) !important;
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-size: 0.8rem !important;
-      letter-spacing: 0.07em !important;
-      transition: var(--transition) !important;
-    }
-    .nav-cta:hover {
-      background: var(--mauve) !important;
-      transform: translateY(-1px);
-    }
-    .nav-cta::after { display: none !important; }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 1.5px;
-      background: var(--mauve-deep);
-      transition: var(--transition);
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--cream);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .mobile-menu.open {
-      display: flex;
-      opacity: 1;
-      pointer-events: all;
-    }
-    .mobile-menu a {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--mauve-deep);
-      letter-spacing: 0.04em;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-
-    /* =============================================
-       HERO
-    ============================================= */
-    #hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 80px;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(201,136,154,0.18) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 50% at 20% 70%, rgba(201,169,110,0.10) 0%, transparent 60%),
-        linear-gradient(160deg, #FAF7F2 0%, #F2EAE4 100%);
-      z-index: 0;
-    }
-
-    /* Decorative shapes */
-    .hero-deco {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.25;
-      z-index: 0;
-    }
-    .hero-deco-1 {
-      width: 480px; height: 480px;
-      background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
-      top: -120px; right: -80px;
-    }
-    .hero-deco-2 {
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-      bottom: -60px; left: 5%;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 620px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(201,169,110,0.12);
-      border: 1px solid rgba(201,169,110,0.3);
-      border-radius: 50px;
-      padding: 7px 16px;
-      margin-bottom: 28px;
-    }
-    .hero-badge span {
-      font-size: 0.73rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-    }
-    .hero-badge .dot {
-      width: 5px; height: 5px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.5; }
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      font-weight: 400;
-      line-height: 1.1;
-      color: var(--mauve-deep);
-      margin-bottom: 24px;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--rose-dark);
-    }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.85;
-      margin-bottom: 40px;
-      max-width: 460px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 56px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-    }
-    .stat-item .stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--mauve-deep);
-      line-height: 1;
-    }
-    .stat-item .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.07em;
-      margin-top: 4px;
-    }
-
-    .hero-image-col {
-      position: absolute;
-      right: 0; top: 0; bottom: 0;
-      width: 45%;
-      z-index: 0;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-image-placeholder {
-      width: 100%;
-      height: 100%;
-      background:
-        linear-gradient(135deg,
-          rgba(201,136,154,0.30) 0%,
-          rgba(201,169,110,0.20) 50%,
-          rgba(125,78,91,0.25) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .hero-image-inner {
-      width: 70%;
-      aspect-ratio: 3/4;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(160deg, rgba(201,136,154,0.5) 0%, rgba(125,78,91,0.5) 100%);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-
-    .hero-image-inner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          rgba(255,255,255,0.03) 0px,
-          rgba(255,255,255,0.03) 1px,
-          transparent 1px,
-          transparent 12px
-        );
-    }
-
-    .hero-image-icon {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-image-icon i {
-      font-size: 4rem;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* =============================================
-       MARQUEE / TICKER
-    ============================================= */
-    .marquee-bar {
-      background: var(--mauve-deep);
-      padding: 14px 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 0;
-      animation: marquee 28s linear infinite;
-      white-space: nowrap;
-    }
-
-    .marquee-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 32px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      flex-shrink: 0;
-    }
-
-    .marquee-item i { color: var(--gold-light); font-size: 0.65rem; }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* =============================================
-       SERVICES
-    ============================================= */
-    #services {
-      padding: 100px 0;
-      background: var(--white);
-    }
-
-    .services-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .services-header .section-subtitle {
-      margin: 0 auto;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .service-card {
-      background: var(--cream);
-      border-radius: var(--radius-md);
-      padding: 36px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition);
-      cursor: default;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 0;
-      background: var(--gold);
-      transition: height 0.4s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-card);
-    }
-    .service-card:hover::before { height: 100%; }
-
-    .service-icon {
-      width: 54px; height: 54px;
-      background: rgba(201,136,154,0.12);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      transition: var(--transition);
-    }
-    .service-card:hover .service-icon {
-      background: var(--rose);
-    }
-    .service-icon i {
-      font-size: 1.3rem;
-      color: var(--rose-dark);
-      transition: var(--transition);
-    }
-    .service-card:hover .service-icon i { color: var(--white); }
-
-    .service-name {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--mauve-deep);
-      margin-bottom: 10px;
-    }
-
-    .service-desc {
-      font-size: 0.87rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .service-tag {
-      display: inline-block;
-      margin-top: 14px;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    /* =============================================
-       ABOUT
-    ============================================= */
-    #about {
-      padding: 100px 0;
-      background: var(--cream);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-    }
-
-    .about-visual {
-      position: relative;
-    }
-
-    .about-main-img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, #D4A0B0 0%, #8B5B6D 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-main-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        rgba(255,255,255,0.04) 0px,
-        rgba(255,255,255,0.04) 1px,
-        transparent 1px,
-        transparent 14px
-      );
-    }
-
-    .about-icon-center {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-    }
-    .about-icon-center i {
-      font-size: 5rem;
-      color: rgba(255,255,255,0.25);
-    }
-
-    .about-badge-card {
-      position: absolute;
-      bottom: -24px; right: -24px;
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
-      box-shadow: var(--shadow-card);
-      min-width: 180px;
-    }
-    .about-badge-card .badge-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 500;
-      color: var(--mauve-deep);
-      line-height: 1;
-    }
-    .about-badge-card .badge-text {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    .about-content { padding-left: 8px; }
-
-    .about-text {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.9;
-      margin-bottom: 20px;
-    }
-
-    .about-features {
-      list-style: none;
-      margin: 32px 0 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .about-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: var(--charcoal);
-    }
-    .about-features li i {
-      color: var(--gold);
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    /* =============================================
-       WHY CHOOSE US
-    ============================================= */
-    #why {
-      padding: 100px 0;
-      background: var(--mauve-deep);
-      position: relative;
-      overflow: hidden;
-    }
-
-    #why::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 90% 20%, rgba(201,169,110,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,136,154,0.10) 0%, transparent 60%);
-    }
-
-    .why-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .why-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .why-header .section-title { color: var(--white); }
-    .why-header .section-subtitle { color: rgba(255,255,255,0.55); margin: 0 auto; }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .why-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: var(--radius-md);
-      padding: 36px 24px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .why-card:hover {
-      background: rgba(255,255,255,0.10);
-      transform: translateY(-4px);
-      border-color: rgba(201,169,110,0.35);
-    }
-
-    .why-icon {
-      width: 60px; height: 60px;
-      background: rgba(201,169,110,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-    }
-    .why-icon i { font-size: 1.4rem; color: var(--gold-light); }
-
-    .why-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-    .why-desc {
-      font-size: 0.83rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-    }
-
-    /* =============================================
-       TESTIMONIALS
-    ============================================= */
-    #testimonials {
-      padding: 100px 0;
-      background: var(--white);
-    }
-
-    .testimonials-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .testimonials-track {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .testimonials-slider {
-      display: flex;
-      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .testimonial-card {
-      min-width: 100%;
-      padding: 0 12px;
-    }
-
-    @media (min-width: 768px) {
-      .testimonial-card { min-width: 33.333%; }
-    }
-
-    .testimonial-inner {
-      background: var(--cream);
-      border-radius: var(--radius-md);
-      padding: 36px 32px;
-      height: 100%;
-      position: relative;
-    }
-
-    .testimonial-inner::before {
-      content: '\201C';
-      font-family: var(--font-display);
-      font-size: 5rem;
-      color: var(--rose);
-      opacity: 0.2;
-      position: absolute;
-      top: 8px; left: 24px;
-      line-height: 1;
-    }
-
-    .testimonial-stars {
-      display: flex;
-      gap: 3px;
-      margin-bottom: 18px;
-    }
-    .testimonial-stars i { color: var(--gold); font-size: 0.85rem; }
-
-    .testimonial-text {
-      font-size: 0.9rem;
-      color: var(--charcoal);
-      line-height: 1.8;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .author-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--rose) 0%, var(--mauve) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .author-avatar span {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      color: var(--white);
-      font-weight: 500;
-    }
-
-    .author-name {
-      font-weight: 500;
-      font-size: 0.88rem;
-      color: var(--mauve-deep);
-    }
-    .author-service {
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .slider-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 40px;
-    }
-
-    .slider-btn {
-      width: 44px; height: 44px;
-      border: 1.5px solid var(--mauve-deep);
-      border-radius: 50%;
-      background: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      color: var(--mauve-deep);
-    }
-    .slider-btn:hover {
-      background: var(--mauve-deep);
-      color: var(--white);
-    }
-
-    .slider-dots {
-      display: flex;
-      gap: 8px;
-    }
-    .slider-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--ivory);
-      border: 1.5px solid var(--rose);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .slider-dot.active {
-      background: var(--rose);
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    /* =============================================
-       GALLERY STRIP
-    ============================================= */
-    #gallery {
-      padding: 100px 0;
-      background: var(--cream);
-    }
-
-    .gallery-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 220px 220px;
-      gap: 16px;
-    }
-
-    .gallery-item {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .gallery-item.span-2 { grid-column: span 2; }
-    .gallery-item.span-row-2 { grid-row: span 2; }
-
-    .gallery-fill {
-      width: 100%; height: 100%;
-      transition: transform 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .gallery-item:hover .gallery-fill { transform: scale(1.04); }
-
-    .gallery-fill-1 { background: linear-gradient(135deg, #E8C4CE 0%, #C98499 100%); }
-    .gallery-fill-2 { background: linear-gradient(135deg, #D4C1E0 0%, #9B7AB5 100%); }
-    .gallery-fill-3 { background: linear-gradient(135deg, #C8DECC 0%, #7DAB88 100%); }
-    .gallery-fill-4 { background: linear-gradient(135deg, #E6D8C4 0%, #C4A878 100%); }
-    .gallery-fill-5 { background: linear-gradient(135deg, #C4D4E6 0%, #7899BC 100%); }
-    .gallery-fill-6 { background: linear-gradient(135deg, #E6C4D0 0%, #B97890 100%); }
-
-    .gallery-fill i {
-      font-size: 2.5rem;
-      color: rgba(255,255,255,0.35);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(93,52,66,0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-    .gallery-item:hover .gallery-overlay {
-      background: rgba(93,52,66,0.25);
-    }
-    .gallery-overlay-text {
-      color: var(--white);
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0;
-      transition: var(--transition);
-      font-weight: 500;
-    }
-    .gallery-item:hover .gallery-overlay-text { opacity: 1; }
-
-    /* =============================================
-       CONTACT / BOOKING CTA
-    ============================================= */
-    #contact {
-      padding: 100px 0;
-      background: var(--white);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .contact-info .section-title { margin-bottom: 28px; }
-
-    .contact-details {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-bottom: 36px;
-    }
-    .contact-details li {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      font-size: 0.9rem;
-    }
-    .contact-icon {
-      width: 40px; height: 40px;
-      background: var(--ivory);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-icon i { color: var(--rose-dark); font-size: 0.95rem; }
-    .contact-detail-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-    .contact-detail-value { color: var(--charcoal); line-height: 1.5; }
-
-    .contact-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    /* Map placeholder */
-    .map-block {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      height: 280px;
-      background: var(--ivory);
-      position: relative;
-      margin-top: 24px;
-    }
-
-    .map-block iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Form */
-    .booking-form {
-      background: var(--cream);
-      border-radius: var(--radius-lg);
-      padding: 44px 40px;
-    }
-
-    .form-title {
-      font-family: var(--font-display);
-      font-size: 1.7rem;
-      color: var(--mauve-deep);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    .form-subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .form-field {
-      margin-bottom: 16px;
-    }
-    .form-field.full { grid-column: 1 / -1; }
-
-    label {
-      display: block;
-      font-size: 0.76rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mauve);
-      margin-bottom: 8px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      background: var(--white);
-      border: 1.5px solid transparent;
-      border-radius: var(--radius-sm);
-      padding: 13px 16px;
-      font-family: var(--font-body);
-      font-size: 0.88rem;
-      color: var(--charcoal);
-      transition: var(--transition);
-      outline: none;
-    }
-    input::placeholder, textarea::placeholder { color: #BEB0B3; }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--rose);
-      background: var(--white);
-      box-shadow: 0 0 0 4px rgba(201,136,154,0.10);
-    }
-    select { cursor: pointer; }
-    textarea { resize: vertical; min-height: 100px; }
-
-    .form-submit {
-      width: 100%;
-      margin-top: 4px;
-      justify-content: center;
-      font-size: 0.88rem;
-    }
-
-    /* =============================================
-       FOOTER
-    ============================================= */
-    footer {
-      background: var(--mauve-deep);
-      color: rgba(255,255,255,0.7);
-      padding: 60px 0 32px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(201,169,110,0.07) 0%, transparent 60%);
-    }
-
-    .footer-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      margin-bottom: 32px;
-    }
-
-    .footer-brand .logo-main {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--white);
-      letter-spacing: 0.04em;
-    }
-    .footer-brand .logo-sub {
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      font-weight: 500;
-      display: block;
-      margin-top: 2px;
-      margin-bottom: 16px;
-    }
-    .footer-tagline {
-      font-size: 0.87rem;
-      line-height: 1.75;
-      margin-bottom: 24px;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 12px;
-    }
-    .social-btn {
-      width: 38px; height: 38px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
-    }
-    .social-btn:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    .footer-col-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gold-light);
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .footer-links a {
-      font-size: 0.87rem;
-      color: rgba(255,255,255,0.55);
-      transition: color var(--transition);
-    }
-    .footer-links a:hover { color: var(--gold-light); }
-
-    .footer-hours {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .footer-hours li {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.55);
-    }
-    .footer-hours .day { color: rgba(255,255,255,0.75); }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-    }
-
-    /* =============================================
-       WHATSAPP FLOAT
-    ============================================= */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 28px; right: 28px;
-      z-index: 990;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .whatsapp-tooltip {
-      background: var(--charcoal);
-      color: var(--white);
-      font-size: 0.78rem;
-      padding: 7px 14px;
-      border-radius: 50px;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: var(--transition);
-      pointer-events: none;
-    }
-
-    .whatsapp-btn {
-      width: 56px; height: 56px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 24px rgba(37,211,102,0.40);
-      transition: var(--transition);
-    }
-    .whatsapp-btn i { font-size: 1.6rem; color: var(--white); }
-    .whatsapp-btn:hover {
-      transform: scale(1.08) translateY(-2px);
-      box-shadow: 0 10px 32px rgba(37,211,102,0.50);
-    }
-    .whatsapp-float:hover .whatsapp-tooltip {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* =============================================
-       SECTION DIVIDER
-    ============================================= */
-    .divider {
-      width: 48px; height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin: 16px 0 24px;
-    }
-    .divider.center { margin: 16px auto 24px; }
-
-    /* =============================================
-       MOBILE / RESPONSIVE
-    ============================================= */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-      .gallery-item.span-2, .gallery-item.span-row-2 {
-        grid-column: auto;
-        grid-row: auto;
-      }
-      .gallery-item { height: 200px; }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-
-      #hero { min-height: 100svh; padding-top: 70px; }
-      .hero-image-col { display: none; }
-
-      .hero-stats { gap: 24px; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .about-badge-card { right: 0; }
-
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-
-      .form-row { grid-template-columns: 1fr; }
-
-      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-
-      .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr 1fr; }
-
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery-item { height: 150px; }
-
-      .hero-title { font-size: 2.6rem; }
-    }
-
-    @media (max-width: 480px) {
-      .why-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item { height: 200px; }
-      .booking-form { padding: 28px 20px; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; justify-content: center; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ══ PRIMARY SEO ══ -->
+<title>Shugar Prestige | Nail Spa · Facial · Beauty · Paragon, Orchard Singapore</title>
+<meta name="description" content="Shugar Prestige at Paragon, Orchard — nail spa, facial, eyelash, brow embroidery, hair removal and kids spa treatments. WhatsApp +65 8974 9658 to book." />
+<meta name="keywords" content="nail spa Orchard, facial Paragon, beauty salon Orchard Road, eyelash extension Singapore, eyebrow embroidery Singapore, kids spa Singapore, Shugar Prestige" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://shugarprestige.com/" />
+
+<!-- ══ OPEN GRAPH ══ -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://shugarprestige.com/" />
+<meta property="og:title" content="Shugar Prestige | Nail Spa · Facial · Beauty · Paragon, Orchard" />
+<meta property="og:description" content="Nail spa, facial, eyelash, brow embroidery, hair removal and kids spa treatments at Paragon, Orchard. Book via WhatsApp." />
+<meta property="og:image" content="https://shugarprestige.com/images/hero-salon.jpg" />
+<meta property="og:locale" content="en_SG" />
+<meta property="og:site_name" content="Shugar Prestige" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://shugarprestige.com/images/hero-salon.jpg" />
+
+
+<!-- Google Fonts: Cormorant Garamond (display) + Karla (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ══════════════ TOKENS ══════════════ */
+:root {
+  --sand:        #f5f1e9;
+  --background:  #faf7f1;
+  --secondary:   #efe9df;
+  --foreground:  #453c33;
+  --ink-soft:    #7d7167;
+  --border:      #e2dacd;
+  --primary:     #7d6a58;
+  --on-primary:  #faf7f1;
+  --accent:      #d3c2ab;
+  --display:     "Cormorant Garamond", Georgia, serif;
+  --body:        "Karla", ui-sans-serif, system-ui, sans-serif;
+  --max:         1400px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 300; letter-spacing: -0.01em; margin: 0; }
+p { margin: 0; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.container { margin: 0 auto; max-width: var(--max); padding-left: 1.5rem; padding-right: 1.5rem; }
+.section { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+
+.eyebrow {
+  display: block;
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rule-line { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 2rem 0; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--foreground); }
+.btn-outline { border-color: var(--border); color: var(--foreground); }
+.btn-outline:hover { background: var(--secondary); }
+.btn-light { background: var(--on-primary); color: var(--foreground); }
+.btn-light:hover { background: var(--accent); }
+.btn-light-outline { border-color: rgba(250,247,241,.5); color: var(--on-primary); }
+.btn-light-outline:hover { background: rgba(250,247,241,.12); }
+
+/* fade-in on scroll */
+.fade-up { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+.fade-up.visible { opacity: 1; transform: none; }
+.hero .fade-up { transition-delay: .12s; }
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ══════════════ NAV ══════════════ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  transition: background-color .35s ease, box-shadow .35s ease;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.nav-logo { font-family: var(--display); font-size: 1.05rem; letter-spacing: .3em; text-transform: uppercase; color: var(--on-primary); }
+.nav-links { display: none; gap: 2.25rem; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,247,241,.85); }
+.nav-links a:hover { opacity: .6; }
+.nav-cta { display: none; border-radius: 999px; font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; padding: .65rem 1.35rem; border: 1px solid rgba(250,247,241,.5); color: var(--on-primary); transition: background-color .25s ease, color .25s ease; }
+.nav-cta:hover { background: var(--on-primary); color: var(--foreground); }
+
+.nav.scrolled { background: rgba(250,247,241,.95); box-shadow: 0 1px 0 var(--border); backdrop-filter: blur(8px); }
+.nav.scrolled .nav-logo,
+.nav.scrolled .nav-links { color: var(--foreground); }
+.nav.scrolled .nav-cta { border-color: var(--primary); color: var(--primary); }
+.nav.scrolled .nav-cta:hover { background: var(--primary); color: var(--on-primary); }
+.nav.scrolled .hamburger span { background: var(--foreground); }
+
+.hamburger { display: flex; flex-direction: column; gap: 5px; padding: 6px; background: none; border: 0; cursor: pointer; }
+.hamburger span { display: block; width: 24px; height: 1px; background: var(--on-primary); transition: background-color .35s ease; }
+
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 60;
+  background: var(--background);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.75rem;
+  transform: translateY(-100%); transition: transform .45s cubic-bezier(.16,1,.3,1);
+}
+.mobile-menu.open { transform: none; }
+.mobile-menu a { font-family: var(--display); font-size: 2rem; }
+.mobile-menu .wa { font-family: var(--body); font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--primary); }
+.mobile-close { position: absolute; top: 1.4rem; right: 1.6rem; background: none; border: 0; font-size: 1.4rem; cursor: pointer; color: var(--foreground); }
+
+/* ══════════════ HERO ══════════════ */
+.hero { position: relative; height: 92vh; min-height: 620px; overflow: hidden; }
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+.hero-veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(69,60,51,.52) 0%, rgba(69,60,51,.22) 38%, rgba(53,45,38,.72) 82%, rgba(53,45,38,.86) 100%); }
+.hero-inner { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 4.5rem; }
+.hero .eyebrow { color: rgba(250,247,241,.8); }
+.hero h1 { margin-top: 1.15rem; max-width: 46rem; font-size: clamp(2.75rem, 8vw, 6rem); line-height: 1.03; color: var(--on-primary); }
+.hero h1 em { font-style: italic; }
+.hero-desc { margin-top: 1.4rem; max-width: 30rem; font-size: .9rem; line-height: 1.75; color: rgba(250,247,241,.85); }
+.hero-actions { margin-top: 2.1rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ══════════════ PILLARS ══════════════ */
+.pillars { background: var(--secondary); border-bottom: 1px solid var(--border); }
+.pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+.pillar-item { border-bottom: 1px solid var(--border); padding: 2rem .5rem; text-align: center; }
+.pillar-num { font-family: var(--display); font-size: 1.9rem; }
+.pillar-label { margin-top: .45rem; font-size: .6875rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ══════════════ ABOUT ══════════════ */
+.about-grid { display: grid; gap: 3rem; align-items: center; }
+.about-copy h2 { margin-top: 1rem; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; max-width: 22ch; }
+.about-copy p { margin-top: 1.25rem; font-size: .9rem; line-height: 1.85; color: var(--ink-soft); max-width: 34rem; }
+.about-copy .btn { margin-top: 2rem; }
+.about-grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+
+/* ══════════════ TREATMENTS ══════════════ */
+.section-head { display: flex; flex-direction: column; gap: 1.25rem; }
+.section-head h2 { margin-top: 1rem; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; max-width: 20ch; }
+.section-note { max-width: 25rem; font-size: .875rem; line-height: 1.8; color: var(--ink-soft); }
+
+.svc-tabs { margin-top: 3rem; display: flex; flex-wrap: wrap; gap: .5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
+.svc-tab {
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  padding: .7rem 1.15rem; border: 1px solid var(--border); border-radius: 999px; background: transparent;
+  color: var(--ink-soft); cursor: pointer; font-family: var(--body);
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+.svc-tab:hover { border-color: var(--accent); color: var(--foreground); }
+.svc-tab.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+
+.svc-panel { display: none; margin-top: 2.5rem; gap: 0 2.5rem; }
+.svc-panel.active { display: grid; }
+.svc-card { padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+.svc-card h3 { font-size: 1.35rem; }
+.svc-card p { margin-top: .5rem; font-size: .875rem; line-height: 1.75; color: var(--ink-soft); max-width: 38rem; }
+
+.svc-media { margin-top: 3.5rem; display: grid; gap: 1.25rem; }
+.svc-media img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+
+.enquire-row { margin-top: 3rem; text-align: center; }
+.enquire-note { margin-bottom: 1.25rem; font-size: .8rem; letter-spacing: .04em; color: var(--ink-soft); }
+
+/* ══════════════ PHILOSOPHY ══════════════ */
+.philosophy { background: var(--primary); text-align: center; }
+.philosophy-quote { margin: 0 auto; max-width: 44rem; font-family: var(--display); font-size: clamp(1.6rem, 4.5vw, 2.6rem); line-height: 1.3; font-style: italic; color: var(--on-primary); }
+.philosophy-attr { margin-top: 1.5rem; font-size: .6875rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(250,247,241,.7); }
+
+/* ══════════════ WHY ══════════════ */
+.why { background: var(--secondary); }
+.why-grid { margin-top: 3rem; display: grid; gap: 2.5rem; }
+.why-item h3 { font-size: 1.35rem; }
+.why-item p { margin-top: .55rem; font-size: .875rem; line-height: 1.75; color: var(--ink-soft); }
+
+/* ══════════════ TEAM ══════════════ */
+.princess { background: var(--secondary); }
+.princess-grid { display: grid; gap: 2.5rem; align-items: center; }
+.princess-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.princess-text h2 { margin-top: 1rem; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; }
+.princess-text > p { margin-top: 1.25rem; font-size: .9rem; line-height: 1.85; color: var(--ink-soft); }
+.princess-list { margin: 1.75rem 0 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+.princess-list li { font-size: .88rem; line-height: 1.75; color: var(--ink-soft); padding-left: 1.15rem; position: relative; }
+.princess-list li::before { content: ""; position: absolute; left: 0; top: .65em; width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
+.princess-list strong { color: var(--foreground); font-weight: 500; }
+.princess-note { margin-top: 1.75rem; font-size: .88rem; line-height: 1.8; color: var(--foreground); font-style: italic; }
+.princess-text .btn { margin-top: 1.75rem; }
+
+/* ══════════════ CONTACT ══════════════ */
+.contact { border-top: 1px solid var(--border); }
+.contact-grid { display: grid; gap: 3rem; }
+.contact-info h2 { margin-top: 1rem; font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.15; }
+.contact-info > p { margin-top: 1.15rem; max-width: 30rem; font-size: .875rem; line-height: 1.8; color: var(--ink-soft); }
+.info-block { margin-top: 2rem; }
+.info-label { font-size: .6875rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-soft); }
+.info-value { margin-top: .55rem; font-size: .95rem; line-height: 1.8; }
+.info-value a:hover { color: var(--primary); text-decoration: underline; }
+.social-row { margin-top: .75rem; display: flex; gap: .65rem; }
+.social-link { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--border); color: var(--foreground); transition: background-color .25s ease, color .25s ease; }
+.social-link:hover { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.contact-cta { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+.contact-map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: grayscale(.35) sepia(.12); }
+
+/* ══════════════ FOOTER ══════════════ */
+footer { border-top: 1px solid var(--border); background: var(--background); }
+.footer-inner { padding-top: 3rem; padding-bottom: 3rem; text-align: center; }
+.footer-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .3em; text-transform: uppercase; }
+.footer-tagline { margin-top: .5rem; font-size: .6875rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-soft); }
+.footer-links { margin-top: 1.75rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.footer-links a:hover { color: var(--foreground); }
+.footer-social { margin-top: 1.5rem; display: flex; justify-content: center; gap: .65rem; }
+.footer-bottom { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ══════════════ LOGO ══════════════ */
+.nav-logo { display: flex; align-items: center; }
+.nav-logo img { height: 46px; width: auto; display: block; filter: drop-shadow(0 2px 10px rgba(40,32,26,.55)); transition: filter .35s ease; }
+.nav.scrolled .nav-logo img { filter: none; }
+.mobile-menu .mobile-logo img { height: 54px; width: auto; }
+.footer-logo img { height: 52px; width: auto; }
+
+.btn-wa { background: #6f7f61; color: #faf7f1; border-color: #6f7f61; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; }
+.btn-wa:hover { background: #5d6c51; border-color: #5d6c51; color: #faf7f1; }
+.btn-wa .wa-ico { width: 15px; height: 15px; flex: none; }
+
+/* ══════════════ FLOATING WHATSAPP ══════════════ */
+.wa-float {
+  position: fixed; right: 1.15rem; bottom: 1.15rem; z-index: 70;
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.15rem; border-radius: 999px;
+  background: #6f7f61; color: #faf7f1;
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  box-shadow: 0 14px 34px -12px rgba(111,127,97,.7);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.wa-float:hover { transform: translateY(-2px); background: #5d6c51; box-shadow: 0 18px 40px -12px rgba(111,127,97,.85); }
+.wa-float svg { width: 20px; height: 20px; flex: none; }
+.wa-float span { display: none; }
+@media (min-width: 768px) {
+  .wa-float { right: 1.75rem; bottom: 1.75rem; }
+  .wa-float span { display: inline; }
+}
+
+/* ══════════════ CTA BAND ══════════════ */
+.cta-band { background: var(--primary); text-align: center; }
+.cta-band .eyebrow { color: rgba(250,247,241,.7); }
+.cta-band h2 { margin: 1rem auto 0; max-width: 20ch; font-size: clamp(2rem, 5.5vw, 3.25rem); line-height: 1.15; color: var(--on-primary); }
+.cta-band p { margin: 1.15rem auto 0; max-width: 30rem; font-size: .9rem; line-height: 1.8; color: rgba(250,247,241,.82); }
+.cta-actions { margin-top: 2.25rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media (min-width: 640px) {
+  .svc-panel.active { grid-template-columns: repeat(2, 1fr); }
+  .svc-media { grid-template-columns: repeat(3, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .container { padding-left: 3rem; padding-right: 3rem; }
+  .section { padding-top: 7.5rem; padding-bottom: 7.5rem; }
+  .nav-links, .nav-cta { display: flex; }
+  .hamburger { display: none; }
+  .hero-inner { padding-bottom: 6.5rem; }
+  .pillars-grid { grid-template-columns: repeat(4, 1fr); }
+  .pillar-item { border-bottom: 0; border-right: 1px solid var(--border); }
+  .pillar-item:last-child { border-right: 0; }
+  .pillar-num { font-size: 2.25rem; }
+  .about-grid { grid-template-columns: 1.05fr 1fr; }
+  .section-head { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .princess-grid { grid-template-columns: 1fr 1.1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; text-align: left; }
+  .footer-links, .footer-social, .footer-tagline { margin-top: 0; }
+  .footer-bottom { width: 100%; margin-top: 2rem; }
+}
+
+/* ══════════════ PROMO TEASER (home) ══════════════ */
+.promo-teaser { background: var(--primary); }
+.promo-teaser .container { display: grid; gap: 2rem; align-items: center; }
+.promo-teaser .eyebrow { color: rgba(250,247,241,.7); }
+.promo-teaser h2 { margin-top: 1rem; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; color: var(--on-primary); }
+.promo-teaser p { margin-top: 1.15rem; max-width: 34rem; font-size: .9rem; line-height: 1.85; color: rgba(250,247,241,.82); }
+.promo-teaser .btn { margin-top: 2rem; }
+.promo-strip { display: grid; gap: .75rem; }
+.promo-strip div { border: 1px solid rgba(250,247,241,.28); border-radius: 999px; padding: .85rem 1.5rem; font-size: .78rem; letter-spacing: .04em; color: rgba(250,247,241,.9); }
+
+/* ══════════════ PROMO PAGE ══════════════ */
+.promo-head { padding-top: 9rem; text-align: center; }
+.promo-head .eyebrow { display: block; }
+.promo-head h1 { margin-top: 1rem; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.1; }
+.promo-head p { margin: 1.25rem auto 0; max-width: 34rem; font-size: .92rem; line-height: 1.85; color: var(--ink-soft); }
+.promo-grid { display: grid; gap: 1.25rem; margin-top: 3rem; }
+.promo-card { border: 1px solid var(--border); background: var(--sand); padding: 2rem 1.75rem; display: flex; flex-direction: column; }
+.promo-card .promo-tag { align-self: flex-start; border-radius: 999px; background: var(--accent); color: var(--foreground); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; padding: .4rem .9rem; }
+.promo-card h3 { margin-top: 1.25rem; font-size: 1.6rem; line-height: 1.25; }
+.promo-card .promo-price { margin-top: .65rem; font-family: var(--display); font-size: 1.35rem; color: var(--primary); }
+.promo-card .promo-price s { color: var(--ink-soft); font-size: .8em; margin-right: .5rem; }
+.promo-card p { margin-top: .9rem; font-size: .86rem; line-height: 1.8; color: var(--ink-soft); flex: 1; }
+.promo-card .btn { margin-top: 1.75rem; align-self: flex-start; }
+.promo-terms { margin-top: 3.5rem; border-top: 1px solid var(--border); padding-top: 2rem; }
+.promo-terms h4 { font-size: 1.25rem; }
+.promo-terms ul { margin: 1rem 0 0; padding-left: 1.1rem; display: grid; gap: .6rem; }
+.promo-terms li { font-size: .82rem; line-height: 1.75; color: var(--ink-soft); }
+@media (min-width: 768px) {
+  .promo-teaser .container { grid-template-columns: 1.15fr .85fr; }
+  .promo-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .promo-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- =============================================
-     NAVIGATION
-============================================= -->
-<nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">
-        <span class="logo-main">Shugar Prestige</span>
-        <span class="logo-sub">Paragon · Orchard Road</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#contact" class="nav-cta">Book Now</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+<!-- ══════════════ NAV ══════════════ -->
+<header class="nav" id="mainNav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Shugar Prestige home"><img src="images/logo.png" alt="Shugar Prestige" width="454" height="226" /></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#treatments">Treatments</a></li>
+      <li><a href="#little-princess">Little Princess</a></li>
+      <li><a href="promotions.html">Promotions</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Visit Us</a></li>
+    </ul>
+    <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20enquire%20about%20an%20appointment" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
+</header>
 
-<!-- Mobile Menu -->
-<nav class="mobile-menu" id="mobileMenu">
-  <a href="#services" class="mobile-link">Services</a>
-  <a href="#about" class="mobile-link">About</a>
-  <a href="#gallery" class="mobile-link">Gallery</a>
-  <a href="#testimonials" class="mobile-link">Reviews</a>
-  <a href="#contact" class="mobile-link">Book Now</a>
-</nav>
-
-<!-- =============================================
-     HERO
-============================================= -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-deco hero-deco-1"></div>
-  <div class="hero-deco hero-deco-2"></div>
-
-  <div class="hero-image-col">
-    <div class="hero-image-placeholder">
-      <div class="hero-image-inner">
-        <div class="hero-image-icon"><i class="fa-regular fa-gem"></i></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" style="position:relative;z-index:1;width:100%;">
-    <div class="hero-content">
-      <div class="hero-badge reveal">
-        <span class="dot"></span>
-        <span>Est. 1995 · Paragon, Orchard Road</span>
-      </div>
-      <h1 class="hero-title reveal reveal-delay-1">
-        Where Every<br><em>Detail</em> of You<br>Is Cared For
-      </h1>
-      <p class="hero-desc reveal reveal-delay-2">
-        Singapore's premier one-stop beauty salon — from precision nails and customised facials to lash extensions and eyebrow embroidery. Experience the luxury of being truly looked after.
-      </p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="#contact" class="btn btn-primary">
-          <i class="fa-regular fa-calendar-check"></i> Book an Appointment
-        </a>
-        <a href="#services" class="btn btn-outline">
-          Explore Services
-        </a>
-      </div>
-      <div class="hero-stats reveal reveal-delay-4">
-        <div class="stat-item">
-          <div class="stat-num">28+</div>
-          <div class="stat-label">Years of Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">6</div>
-          <div class="stat-label">Service Categories</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">5★</div>
-          <div class="stat-label">Customer Rating</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =============================================
-     MARQUEE
-============================================= -->
-<div class="marquee-bar">
-  <div class="marquee-track">
-    <!-- Duplicated for seamless loop -->
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Organic Nail Spa</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Customised Facials</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Mink Lash Extensions</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> 9D Eyebrow Embroidery</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> IPL Hair Removal</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Kids Spa</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Paragon Shopping Centre</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Organic Nail Spa</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Customised Facials</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Mink Lash Extensions</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> 9D Eyebrow Embroidery</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> IPL Hair Removal</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Kids Spa</span>
-    <span class="marquee-item"><i class="fa-solid fa-circle"></i> Paragon Shopping Centre</span>
-  </div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close">&#10005;</button>
+  <a href="#about">About</a>
+  <a href="#treatments">Treatments</a>
+  <a href="#little-princess">Little Princess</a>
+  <a href="promotions.html">Promotions</a>
+  <a href="#why">Why Us</a>
+  <a href="#contact">Visit Us</a>
 </div>
 
-<!-- =============================================
-     SERVICES
-============================================= -->
-<section id="services">
-  <div class="container">
-    <div class="services-header reveal">
-      <span class="section-label">What We Offer</span>
-      <h2 class="section-title">Our Signature Services</h2>
-      <div class="divider center"></div>
-      <p class="section-subtitle">From head to toe, every treatment is tailored to your unique needs — using world-class products and personalised care.</p>
-    </div>
+<main>
 
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon"><i class="fa-regular fa-hand"></i></div>
-        <div class="service-name">Nails & Nail Spa</div>
-        <p class="service-desc">Manicure, pedicure, Gelish, and Singapore's first organic herbal spa treatment — using natural ingredients, essential oils, and an open-kitchen concept you can customise yourself.</p>
-        <span class="service-tag">Most Loved ✦</span>
-      </div>
-
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon"><i class="fa-regular fa-face-smile-beam"></i></div>
-        <div class="service-name">Facial Treatments</div>
-        <p class="service-desc">Customised facials using Payot, Paris products and kangen ionised water, meticulously tailored to your skin type through expert hand techniques and high-tech equipment.</p>
-        <span class="service-tag">Highly Recommended ✦</span>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon"><i class="fa-regular fa-eye"></i></div>
-        <div class="service-name">Eyelash Extensions</div>
-        <p class="service-desc">Lightweight Korean mink lash extensions in 3D or 6D styles — Natural, Luxury, or Elegant. Beautifully crafted to frame your eyes without weighing you down.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <div class="service-name">Eyebrow Embroidery</div>
-        <p class="service-desc">Signature 9D eyebrow embroidery and eyeliner tattoo for defined, natural-looking brows and eyes that last. Wake up effortlessly polished every single day.</p>
-        <span class="service-tag">Semi-Permanent ✦</span>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon"><i class="fa-solid fa-leaf"></i></div>
-        <div class="service-name">Hair Removal</div>
-        <p class="service-desc">Permanent IPL hair removal, sugar waxing, and face threading — all areas covered. We monitor your hair growth cycle and include complimentary in-store shaving for a seamless experience.</p>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon"><i class="fa-solid fa-star"></i></div>
-        <div class="service-name">Kids Spa</div>
-        <p class="service-desc">Singapore's first kids beauty corner — unicorn pedicure chairs, spa manicure, pedicure and facial for your little ones. iPads and headphones provided so Mum can relax while they do too.</p>
-        <span class="service-tag">First in Singapore ✦</span>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:48px;" class="reveal">
-      <a href="#contact" class="btn btn-gold">
-        <i class="fa-regular fa-calendar"></i> Book a Treatment
-      </a>
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" id="hero">
+  <img src="images/hero-salon.jpg" alt="Shugar Prestige storefront at Paragon, Orchard — neon signage and the nail spa within" width="1600" height="1200" />
+  <div class="hero-veil"></div>
+  <div class="container hero-inner">
+    <p class="eyebrow fade-up">Nail Spa · Facial · Beauty — Paragon, Orchard</p>
+    <h1 class="fade-up">Beauty, <em>unhurried.</em></h1>
+    <p class="hero-desc fade-up">A quiet corner of Paragon for nails, skin and the small rituals that make you feel like yourself again — nail spa, facial, lash, brow and beauty care, all under one roof.</p>
+    <div class="hero-actions fade-up">
+      <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn btn-light" target="_blank" rel="noopener">Book via WhatsApp</a>
+      <a href="#treatments" class="btn btn-light-outline">View Treatments</a>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     ABOUT
-============================================= -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-visual reveal">
-        <div class="about-main-img">
-          <div class="about-icon-center"><i class="fa-regular fa-spa"></i></div>
-        </div>
-        <div class="about-badge-card">
-          <div class="badge-num">28+</div>
-          <div class="badge-text">Years of beauty expertise in Singapore</div>
-        </div>
-      </div>
-      <div class="about-content">
-        <span class="section-label reveal">Our Story</span>
-        <h2 class="section-title reveal">Beauty as a Calling, Not Just a Career</h2>
-        <div class="divider reveal"></div>
-        <p class="about-text reveal">
-          Shugar Prestige was born from a lifetime of dedication to beauty. Our founder, Ms Jenny Ho, opened Classic Beauty Care in 1995 — building a loyal following over more than two decades through her genuine commitment to every client's wellbeing.
-        </p>
-        <p class="about-text reveal">
-          In March 2018, Ms Ho and her daughter Lynn Lim elevated the brand and launched Shugar Prestige at The Paragon — Singapore's most iconic shopping destination. Together, they brought a new vision: a beautiful, feminine, and technically exceptional salon where every woman feels seen, heard, and truly cared for.
-        </p>
-        <ul class="about-features reveal">
-          <li><i class="fa-solid fa-check-circle"></i> Payot Paris skincare products for all facial treatments</li>
-          <li><i class="fa-solid fa-check-circle"></i> Kangen ionised water for superior skin penetration</li>
-          <li><i class="fa-solid fa-check-circle"></i> World-class equipment sourced from international research trips</li>
-          <li><i class="fa-solid fa-check-circle"></i> Organic, herbal nail spa — first of its kind in Singapore</li>
-          <li><i class="fa-solid fa-check-circle"></i> No hard selling — your comfort and trust come first</li>
-        </ul>
-        <div class="reveal">
-          <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        </div>
-      </div>
+<!-- ══════════════ PILLARS ══════════════ -->
+<section class="pillars">
+  <div class="container pillars-grid">
+    <div class="pillar-item">
+      <div class="pillar-num">7</div>
+      <div class="pillar-label">Treatment Categories</div>
+    </div>
+    <div class="pillar-item">
+      <div class="pillar-num">80+</div>
+      <div class="pillar-label">Nail Colours</div>
+    </div>
+    <div class="pillar-item">
+      <div class="pillar-num">Kids</div>
+      <div class="pillar-label">Welcome, Too</div>
+    </div>
+    <div class="pillar-item">
+      <div class="pillar-num">Paragon</div>
+      <div class="pillar-label">Orchard Road</div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     WHY CHOOSE US
-============================================= -->
-<section id="why">
-  <div class="container why-inner">
-    <div class="why-header reveal">
-      <span class="section-label">Why Shugar Prestige</span>
-      <h2 class="section-title">The Shugar Difference</h2>
-      <div class="divider center" style="background:linear-gradient(90deg,var(--gold-light),transparent);"></div>
-      <p class="section-subtitle">We don't just offer beauty services. We offer an experience that makes you feel at home — and leave feeling your absolute best.</p>
+<!-- ══════════════ ABOUT ══════════════ -->
+<section id="about" class="section">
+  <div class="container about-grid">
+    <div class="about-copy fade-up">
+      <span class="eyebrow">About Shugar Prestige</span>
+      <h2>A new chapter at Paragon, built around your treatments.</h2>
+      <p>Shugar Prestige is entering a new chapter at Paragon — refreshed, and focused on doing a few things very well: nail spa, facial, lash and brow work, hair removal, and gentle spa treatments for little ones.</p>
+      <p>Every visit is built around what your skin, nails or schedule actually need that day — not a fixed package. We use trusted names like Payot for facials and O.P.I for nail care, and Kangen ionised water throughout our facial treatments.</p>
+      <a href="#treatments" class="btn btn-outline">Explore Treatments</a>
+    </div>
+    <img class="fade-up" src="images/service-herbal.jpg" alt="Copper basin with rose petals, lemon and fresh herbs prepared for an organic herbal spa" loading="lazy" width="1000" height="1200" />
+  </div>
+</section>
+
+<!-- ══════════════ TREATMENTS ══════════════ -->
+<section id="treatments" class="section" style="background: var(--secondary);">
+  <div class="container">
+    <div class="section-head fade-up">
+      <div>
+        <span class="eyebrow">Our Treatments</span>
+        <h2>Find your treatment</h2>
+      </div>
+      <p class="section-note">Seven categories, each adapted on the day — from a quick express manicure to a full herbal spa ritual.</p>
+    </div>
+
+    <div class="svc-tabs fade-up">
+      <button class="svc-tab active" data-panel="nails">Nail Spa</button>
+      <button class="svc-tab" data-panel="facial">Facial</button>
+      <button class="svc-tab" data-panel="eye">Eye Treatments</button>
+      <button class="svc-tab" data-panel="eyelash">Eyelash</button>
+      <button class="svc-tab" data-panel="embroidery">Embroidery</button>
+      <button class="svc-tab" data-panel="hairremoval">Hair Removal</button>
+      <button class="svc-tab" data-panel="kids">Kids Spa</button>
+    </div>
+
+    <div class="svc-panel active" id="panel-nails">
+      <div class="svc-card"><h3>Classic Manicure &amp; Pedicure</h3><p>Nail shaping, cuticle care, buffing and polish, finished with cuticle oil and massage.</p></div>
+      <div class="svc-card"><h3>Express Manicure &amp; Pedicure</h3><p>A quicker shaping-and-polish service for when time is short.</p></div>
+      <div class="svc-card"><h3>Signature Manicure &amp; Pedicure</h3><p>Our fullest nail ritual, with extended care and finishing touches.</p></div>
+      <div class="svc-card"><h3>Gel Sculpture Extensions</h3><p>Sculpted gel extensions for length and shape, built to last.</p></div>
+      <div class="svc-card"><h3>O.P.I Pro Hand Spa</h3><p>A dedicated hand treatment using O.P.I professional products.</p></div>
+      <div class="svc-card"><h3>LCN Hand &amp; Leg Treatment</h3><p>Intensive German LCN care for hands and legs — deeply conditioning and restorative.</p></div>
+      <div class="svc-card"><h3>Colour &amp; Gel Polish</h3><p>O.P.I, Morgan Taylor and GR polish systems, with 80+ shades to choose from.</p></div>
+      <div class="svc-card"><h3>Signature Organic Herbal Spa</h3><p>Hand or feet, with natural herbal ingredients for detox and softening.</p></div>
+      <div class="svc-card"><h3>Signature Organic Mani &amp; Pedi Spa</h3><p>The full herbal spa experience for both hands and feet in one session.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-facial">
+      <div class="svc-card"><h3>Payot Customised Facial</h3><p>Tailored to your skin's needs — hydrating, sensitive, radiance or purifying.</p></div>
+      <div class="svc-card"><h3>Payot Expert Facial</h3><p>A more intensive Payot treatment for deeper, visible results.</p></div>
+      <div class="svc-card"><h3>Carbon Blast Facial</h3><p>A brightening treatment that targets dullness and uneven texture.</p></div>
+      <div class="svc-card"><h3>Bo Jin Facial</h3><p>An ox-horn tool technique that works meridian points to clear congestion and improve absorption.</p></div>
+      <div class="svc-card"><h3>Gua Sha Facial</h3><p>Traditional gua sha technique to improve circulation and skin tone.</p></div>
+      <div class="svc-card"><h3>SHR Treatment</h3><p>Super Hair Removal technology — gentle, gradual light therapy for skin and hair concerns.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-eye">
+      <div class="svc-card"><h3>Collagen Eye Treatment</h3><p>A gentle treatment to firm and refresh the delicate eye area.</p></div>
+      <div class="svc-card"><h3>RF Eye Treatment</h3><p>Radio-frequency technology to help with fine lines and puffiness.</p></div>
+      <div class="svc-card"><h3>Eye Aqua Shine Injector</h3><p>A hydration-focused treatment for brighter, plumper under-eyes.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-eyelash">
+      <div class="svc-card"><h3>3D Extensions — Natural</h3><p>A soft, everyday lash look with added length and volume.</p></div>
+      <div class="svc-card"><h3>3D Extensions — Elegant</h3><p>A fuller lash set for a more defined finish.</p></div>
+      <div class="svc-card"><h3>3D Extensions — Luxury</h3><p>Our most dramatic lash set, for maximum volume and definition.</p></div>
+      <div class="svc-card"><h3>Korea Eyelash Perming</h3><p>A lash lift technique that curls and lifts your natural lashes.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-embroidery">
+      <div class="svc-card"><h3>9D Eyebrow Embroidery</h3><p>Semi-permanent brow embroidery for a fuller, natural-looking finish.</p></div>
+      <div class="svc-card"><h3>Eyeliner Embroidery — Elegant</h3><p>Semi-permanent eyeliner embroidery for a fuller, more complete eye look.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-hairremoval">
+      <div class="svc-card"><h3>SHR Hair Removal</h3><p>Super Hair Removal — a gentler, near-painless method for longer-term hair reduction, with progress monitored session by session.</p></div>
+      <div class="svc-card"><h3>Brazilian SHR &amp; Waxing</h3><p>Full Brazilian hair removal, by SHR or wax, in a private and unhurried room.</p></div>
+      <div class="svc-card"><h3>Waxing &amp; Threading</h3><p>Underarm, lip, leg, arm and bikini line — with complimentary shaving service in-store.</p></div>
+    </div>
+
+    <div class="svc-panel" id="panel-kids">
+      <div class="svc-card"><h3>Little Princess Manicure &amp; Pedicure</h3><p>A gentle nail treatment designed just for little hands and feet.</p></div>
+      <div class="svc-card"><h3>Little Princess Facial</h3><p>A customised facial made for kids, including a signature chocolate mask.</p></div>
+    </div>
+
+    <div class="svc-media fade-up">
+      <img src="images/service-nails.jpg" alt="Softly finished nails after a manicure at Shugar Prestige" loading="lazy" width="1000" height="1200" />
+      <img src="images/service-skin.jpg" alt="Calm facial treatment room at Shugar Prestige" loading="lazy" width="1000" height="1200" />
+      <img src="images/service-lash.jpg" alt="Lash and brow tools laid out for a treatment" loading="lazy" width="1000" height="1200" />
+    </div>
+
+    <div class="enquire-row fade-up">
+      <p class="enquire-note">Prices vary by treatment length and add-ons — message us for the current menu.</p>
+      <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20enquire%20about%20your%20treatments" class="btn btn-primary" target="_blank" rel="noopener">Enquire via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PHILOSOPHY ══════════════ -->
+<section class="philosophy section">
+  <div class="container fade-up">
+    <p class="philosophy-quote">"Beauty doesn't need to be rushed. It needs to be done right."</p>
+    <p class="philosophy-attr">— Shugar Prestige</p>
+  </div>
+</section>
+
+<!-- ══════════════ WHY ══════════════ -->
+<section id="why" class="why section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <div>
+        <span class="eyebrow">Why Shugar Prestige</span>
+        <h2>A salon built around care, not upsells</h2>
+      </div>
+      <p class="section-note">The same aestheticians, the same unhurried pace, whether you're in for a 30-minute express set or a full afternoon.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-icon"><i class="fa-solid fa-award"></i></div>
-        <div class="why-title">Expertise Since 1995</div>
-        <p class="why-desc">More than 28 years in the beauty industry. Our therapists are trained to the highest standards, with ongoing development in the latest techniques.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-1">
-        <div class="why-icon"><i class="fa-solid fa-flask"></i></div>
-        <div class="why-title">Premium Products Only</div>
-        <p class="why-desc">From Payot Paris facials to US-imported organic herbal nail treatments and Korean mink lashes — we invest in the best, because you deserve it.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-2">
-        <div class="why-icon"><i class="fa-solid fa-heart"></i></div>
-        <div class="why-title">No Hard Selling</div>
-        <p class="why-desc">We believe in honest, pressure-free consultations. Our therapists recommend only what's right for you — not what adds to the bill.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-3">
-        <div class="why-icon"><i class="fa-solid fa-location-dot"></i></div>
-        <div class="why-title">Prime Location</div>
-        <p class="why-desc">Conveniently situated at Paragon, Orchard Road — easy access by MRT or car, with ample mall parking. Beauty that fits your lifestyle.</p>
-      </div>
+      <div class="why-item fade-up"><h3>Personalised, not packaged</h3><p>Every treatment is adapted to what your skin and nails need that day.</p></div>
+      <div class="why-item fade-up"><h3>Trusted product lines</h3><p>Payot facials, O.P.I, Morgan Taylor and GR polish, LCN hand &amp; leg care, and Kangen ionised water.</p></div>
+      <div class="why-item fade-up"><h3>Welcoming for the whole family</h3><p>Dedicated Little Princess treatments for kids, alongside our adult menu.</p></div>
+      <div class="why-item fade-up"><h3>Right in the heart of Orchard</h3><p>Located at Paragon, easy to reach before or after a day out.</p></div>
+      <div class="why-item fade-up"><h3>Simple WhatsApp booking</h3><p>No booking systems to navigate — just message us to confirm a time.</p></div>
+      <div class="why-item fade-up"><h3>Wide range to choose from</h3><p>Seven treatment categories and 80+ nail colours to pick from.</p></div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     TESTIMONIALS
-============================================= -->
-<section id="testimonials">
-  <div class="container">
-    <div class="testimonials-header reveal">
-      <span class="section-label">Client Love</span>
-      <h2 class="section-title">What Our Clients Say</h2>
-      <div class="divider center"></div>
+<!-- ══════════════ PROMO TEASER ══════════════ -->
+<section class="promo-teaser section">
+  <div class="container fade-up">
+    <div>
+      <span class="eyebrow">This season at Shugar</span>
+      <h2>Current promotions</h2>
+      <p>Two offers running at the salon right now — our National Day SHR package and the Glow &amp; Nails Special. Both are redeemable straight over WhatsApp.</p>
+      <a href="promotions.html" class="btn btn-light">See all promotions</a>
     </div>
-
-    <div class="testimonials-track reveal">
-      <div class="testimonials-slider" id="testimonialSlider">
-
-        <div class="testimonial-card">
-          <div class="testimonial-inner">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"Had my facial and nails done by Constance — she was incredibly attentive. Took the time to find out what kind of facial would suit my skin, and was patient throughout. No hard selling at all. Absolutely will be back."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar"><span>C</span></div>
-              <div>
-                <div class="author-name">Correa Yean</div>
-                <div class="author-service">Facial & Manicure</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-inner">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"I've been going to Xerra for my nails for years now. She's meticulous, genuinely caring, and always knows what suits me without me having to explain much. Shugar Prestige is the only place I trust for my nails."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar"><span>M</span></div>
-              <div>
-                <div class="author-name">Michelle T.</div>
-                <div class="author-service">Regular Nail Client</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-inner">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"Brought my daughter for her first manicure and she absolutely loved the unicorn chair! The staff were so sweet and patient with her. We've made it a monthly mother-daughter ritual — it's the highlight of our month."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar"><span>S</span></div>
-              <div>
-                <div class="author-name">Sarah Lim</div>
-                <div class="author-service">Kids Spa & Pedicure</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-inner">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"My 9D eyebrow embroidery came out perfect — so natural-looking, exactly what I asked for. Lynn is incredibly skilled and made sure I was happy at every step. I wake up every morning feeling put together. Worth every cent."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar"><span>R</span></div>
-              <div>
-                <div class="author-name">Rachel Wong</div>
-                <div class="author-service">9D Eyebrow Embroidery</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-inner">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"The organic herbal nail spa is unlike anything I've tried before. You actually smell and feel the difference — real botanicals, not synthetic scents. The team walked me through every ingredient. A genuinely luxurious experience."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar"><span>J</span></div>
-              <div>
-                <div class="author-name">Jennifer Koh</div>
-                <div class="author-service">Organic Herbal Nail Spa</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /.testimonials-slider -->
-    </div><!-- /.testimonials-track -->
-
-    <div class="slider-controls reveal">
-      <button class="slider-btn" id="prevBtn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
-      <div class="slider-dots" id="sliderDots"></div>
-      <button class="slider-btn" id="nextBtn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="promo-strip">
+      <div>National Day — 12 SHR sessions, underarms $128</div>
+      <div>National Day — 12 SHR sessions, Brazilian $148</div>
+      <div>Glow &amp; Nails — Lumi Laser facial + Gelish mani, $69</div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     GALLERY
-============================================= -->
-<section id="gallery">
-  <div class="container">
-    <div class="gallery-header reveal">
-      <span class="section-label">Gallery</span>
-      <h2 class="section-title">A Glimpse of Shugar Prestige</h2>
-      <div class="divider center"></div>
-      <p class="section-subtitle" style="margin:0 auto;">Luxury in every detail — from our beautifully designed space to the quality of every finished look.</p>
-    </div>
-
-    <div class="gallery-grid reveal">
-      <div class="gallery-item span-2">
-        <div class="gallery-fill gallery-fill-1">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Our Salon Space</span>
-          </div>
-          <i class="fa-solid fa-store"></i>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-fill gallery-fill-2">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Nail Art</span>
-          </div>
-          <i class="fa-regular fa-hand"></i>
-        </div>
-      </div>
-      <div class="gallery-item span-row-2">
-        <div class="gallery-fill gallery-fill-3" style="height:100%;">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Facial Suite</span>
-          </div>
-          <i class="fa-regular fa-face-smile-beam"></i>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-fill gallery-fill-4">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Organic Nail Spa</span>
-          </div>
-          <i class="fa-solid fa-leaf"></i>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-fill gallery-fill-5">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Lash Extensions</span>
-          </div>
-          <i class="fa-regular fa-eye"></i>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-fill gallery-fill-6">
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Kids Spa Corner</span>
-          </div>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <p style="text-align:center;margin-top:28px;font-size:0.83rem;color:var(--muted);" class="reveal">
-      <i class="fa-brands fa-instagram"></i>&nbsp; Follow us on Instagram for the latest looks and promotions
-    </p>
-  </div>
-</section>
-
-<!-- =============================================
-     CONTACT & BOOKING
-============================================= -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-grid">
-
-      <!-- LEFT: Info -->
-      <div class="contact-info">
-        <span class="section-label reveal">Find Us</span>
-        <h2 class="section-title reveal">Visit Us at Paragon</h2>
-        <div class="divider reveal"></div>
-        <p class="section-subtitle reveal" style="margin-bottom:36px;">
-          We'd love to welcome you. Walk-ins are welcome, though we recommend booking in advance to secure your preferred time slot.
-        </p>
-
-        <ul class="contact-details reveal">
-          <li>
-            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <div class="contact-detail-label">Address</div>
-              <div class="contact-detail-value">290 Orchard Road, #05-08A<br>Paragon Singapore 238859</div>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-            <div>
-              <div class="contact-detail-label">Phone</div>
-              <div class="contact-detail-value"><a href="tel:+6567322298">+65 6732 2298</a></div>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
-            <div>
-              <div class="contact-detail-label">WhatsApp</div>
-              <div class="contact-detail-value"><a href="https://wa.me/6567322298?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment." target="_blank">Message us on WhatsApp</a></div>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon"><i class="fa-regular fa-clock"></i></div>
-            <div>
-              <div class="contact-detail-label">Opening Hours</div>
-              <div class="contact-detail-value">Mon – Fri: 10:00 AM – 9:00 PM<br>Sat – Sun: 10:00 AM – 8:00 PM</div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="contact-actions reveal">
-          <a href="https://wa.me/6567322298?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment." target="_blank" class="btn btn-primary">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
-          </a>
-          <a href="tel:+6567322298" class="btn btn-outline">
-            <i class="fa-solid fa-phone"></i> Call Us
-          </a>
-        </div>
-
-        <!-- Map -->
-        <div class="map-block reveal" style="margin-top:36px;">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8228879476617!2d103.83282!3d1.30472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1993f6f35461%3A0xc1c0e04f8e8e3c67!2sParagon%20Shopping%20Centre!5e0!3m2!1sen!2ssg!4v1700000000000!5m2!1sen!2ssg"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Shugar Prestige location map">
-          </iframe>
-        </div>
-      </div>
-
-      <!-- RIGHT: Form -->
-      <div class="reveal">
-        <div class="booking-form">
-          <h3 class="form-title">Book an Appointment</h3>
-          <p class="form-subtitle">Fill in your details and we'll confirm your booking within 24 hours.</p>
-
-          <div class="form-row">
-            <div class="form-field">
-              <label for="fname">First Name</label>
-              <input type="text" id="fname" placeholder="Your name" />
-            </div>
-            <div class="form-field">
-              <label for="fphone">Phone Number</label>
-              <input type="tel" id="fphone" placeholder="+65 xxxx xxxx" />
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label for="femail">Email Address</label>
-            <input type="email" id="femail" placeholder="your@email.com" />
-          </div>
-
-          <div class="form-field">
-            <label for="fservice">Service</label>
-            <select id="fservice">
-              <option value="" disabled selected>Select a service</option>
-              <option>Manicure & Pedicure</option>
-              <option>Organic Herbal Nail Spa</option>
-              <option>Facial Treatment</option>
-              <option>Eyelash Extensions</option>
-              <option>Eyelash Perming</option>
-              <option>9D Eyebrow Embroidery</option>
-              <option>Eyeliner Embroidery</option>
-              <option>IPL Hair Removal</option>
-              <option>Sugar Waxing / Threading</option>
-              <option>Kids Spa</option>
-              <option>Not sure — I'd like a recommendation</option>
-            </select>
-          </div>
-
-          <div class="form-row">
-            <div class="form-field">
-              <label for="fdate">Preferred Date</label>
-              <input type="date" id="fdate" />
-            </div>
-            <div class="form-field">
-              <label for="ftime">Preferred Time</label>
-              <select id="ftime">
-                <option value="" disabled selected>Select time</option>
-                <option>10:00 AM</option>
-                <option>11:00 AM</option>
-                <option>12:00 PM</option>
-                <option>1:00 PM</option>
-                <option>2:00 PM</option>
-                <option>3:00 PM</option>
-                <option>4:00 PM</option>
-                <option>5:00 PM</option>
-                <option>6:00 PM</option>
-                <option>7:00 PM</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label for="fnote">Additional Notes</label>
-            <textarea id="fnote" placeholder="Any special requests, skin concerns, or first-visit questions..."></textarea>
-          </div>
-
-          <button class="btn btn-primary form-submit" id="formSubmit" onclick="handleFormSubmit(event)">
-            <i class="fa-regular fa-calendar-check"></i> Request Appointment
-          </button>
-
-          <p style="font-size:0.76rem;color:var(--muted);margin-top:14px;text-align:center;line-height:1.6;">
-            Prefer instant booking? <a href="https://wa.me/6567322298?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment." target="_blank" style="color:var(--rose-dark);text-decoration:underline;">Message us on WhatsApp</a> for fastest response.
-          </p>
-        </div>
-      </div>
-
+<!-- ══════════════ LITTLE PRINCESS ══════════════ -->
+<section id="little-princess" class="princess section">
+  <div class="container princess-grid">
+    <img class="princess-photo fade-up" src="images/little-princess.jpg" alt="A child enjoying a Little Princess manicure at Shugar Prestige" loading="lazy" width="1000" height="1250" />
+    <div class="princess-text fade-up">
+      <span class="eyebrow">For our youngest guests</span>
+      <h2>The Little Princess experience</h2>
+      <p>A pampering afternoon made just for children — gentle, playful, and every bit as considered as our adult menu. Little ones get their own full-size chair, an iPad and headphones, and a treatment paced to keep them comfortable from start to finish.</p>
+      <ul class="princess-list">
+        <li><strong>Little Princess Manicure &amp; Pedicure</strong> — soft shaping, buffing and child-safe polish for little hands and feet.</li>
+        <li><strong>Little Princess Facial</strong> — a gentle customised facial finished with our signature chocolate mask.</li>
+        <li><strong>Mother &amp; daughter side-by-side</strong> — book two chairs together and make it a shared ritual.</li>
+      </ul>
+      <p class="princess-note">Our experienced team looks forward to receiving you — and your little one.</p>
+      <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20a%20Little%20Princess%20treatment" class="btn btn-primary" target="_blank" rel="noopener">Book a Little Princess treatment</a>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     FOOTER
-============================================= -->
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact" class="contact section">
+  <div class="container contact-grid">
+    <div class="contact-info fade-up">
+      <span class="eyebrow">Find Us</span>
+      <h2>Visit Shugar Prestige</h2>
+      <p>Walk-ins welcome, though we recommend booking ahead so we can prepare the right treatment for you.</p>
+
+      <div class="info-block">
+        <div class="info-label">Address</div>
+        <div class="info-value">
+          290 Orchard Rd, #05-08A<br />
+          Paragon, Singapore 238859<br />
+          <span style="color: var(--ink-soft); font-size: .9em;">Nearest MRT: Orchard</span>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Opening Hours</div>
+        <!-- Please confirm these hours — taken from a third-party listing. -->
+        <div class="info-value">
+          Monday – Friday · 10:00 am – 9:00 pm<br />
+          Saturday – Sunday · 10:00 am – 8:00 pm
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">WhatsApp / Phone</div>
+        <div class="info-value">
+          <a href="https://wa.me/6589749658" target="_blank" rel="noopener">+65 8974 9658</a><br />
+          <a href="tel:+6567322298">+65 6732 2298</a>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Follow Us</div>
+        <div class="social-row">
+          <a href="https://instagram.com/shugar.prestige" target="_blank" rel="noopener" class="social-link" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://facebook.com/shugarprestige" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://wa.me/6589749658" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="contact-cta">
+        <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn btn-primary" target="_blank" rel="noopener">Book via WhatsApp</a>
+        <a href="tel:+6567322298" class="btn btn-outline">Call Us</a>
+      </div>
+    </div>
+
+    <div class="contact-map fade-up">
+      <iframe src="https://maps.google.com/maps?q=290%20Orchard%20Rd%20%2305-08A%20Paragon%20Singapore%20238859&output=embed" title="Map showing Shugar Prestige at Paragon, Orchard" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ CTA BAND ══════════════ -->
+<section class="cta-band section">
+  <div class="container fade-up">
+    <span class="eyebrow">Ready when you are</span>
+    <h2>Come glam up with us</h2>
+    <p>Message us on WhatsApp for availability, or call the salon — walk-ins are welcome whenever we have a chair free.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn btn-light" target="_blank" rel="noopener">Book via WhatsApp</a>
+      <a href="tel:+6567322298" class="btn btn-light-outline">Call +65 6732 2298</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="container footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo-main">Shugar Prestige</div>
-        <span class="logo-sub">Paragon · Orchard Road · Singapore</span>
-        <p class="footer-tagline">Your one-stop beauty destination since 1995. Trusted by thousands of women across Singapore for nails, facials, lashes, embroidery, and more.</p>
-        <div class="footer-social">
-          <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://wa.me/6567322298?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment." target="_blank" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Quick Links</div>
-        <ul class="footer-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#testimonials">Reviews</a></li>
-          <li><a href="#contact">Book Now</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Opening Hours</div>
-        <ul class="footer-hours">
-          <li><span class="day">Monday</span><span>10am – 9pm</span></li>
-          <li><span class="day">Tuesday</span><span>10am – 9pm</span></li>
-          <li><span class="day">Wednesday</span><span>10am – 9pm</span></li>
-          <li><span class="day">Thursday</span><span>10am – 9pm</span></li>
-          <li><span class="day">Friday</span><span>10am – 9pm</span></li>
-          <li><span class="day">Saturday</span><span>10am – 8pm</span></li>
-          <li><span class="day">Sunday</span><span>10am – 8pm</span></li>
-        </ul>
-      </div>
+    <div>
+      <div class="footer-logo"><img src="images/logo.png" alt="Shugar Prestige" width="454" height="226" loading="lazy" /></div>
+      <div class="footer-tagline">Beauty, unhurried</div>
     </div>
-
-    <div class="footer-bottom">
-      <span>© 2025 Shugar Prestige. All rights reserved.</span>
-      <span>290 Orchard Road, #05-08A Paragon, Singapore 238859 · +65 6732 2298</span>
+    <nav class="footer-links">
+      <a href="#about">About</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#little-princess">Little Princess</a>
+      <a href="promotions.html">Promotions</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Visit Us</a>
+    </nav>
+    <div class="footer-social">
+      <a href="https://instagram.com/shugar.prestige" target="_blank" rel="noopener" class="social-link" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://facebook.com/shugarprestige" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://wa.me/6589749658" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
     </div>
+    <div class="footer-bottom">© 2026 Shugar Prestige · Paragon, Orchard · Singapore 238859</div>
   </div>
 </footer>
 
-<!-- =============================================
-     WHATSAPP FLOAT
-============================================= -->
-<div class="whatsapp-float">
-  <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
-  <a href="https://wa.me/6567322298?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment." target="_blank" class="whatsapp-btn" aria-label="WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
-</div>
-
-<!-- =============================================
-     JAVASCRIPT
-============================================= -->
+<!-- ══════════════ JAVASCRIPT ══════════════ -->
 <script>
-  /* ----- Navbar scroll ----- */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
+// sticky nav colour change
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function () {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// mobile menu
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+var mobileClose = document.getElementById('mobileClose');
+function closeMobile() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', function () { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; });
+mobileClose.addEventListener('click', closeMobile);
+mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMobile); });
+
+// fade-in on scroll
+var observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(function (el) { observer.observe(el); });
 
-  /* ----- Hamburger menu ----- */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+// treatment tabs
+document.querySelectorAll('.svc-tab').forEach(function (tab) {
+  tab.addEventListener('click', function () {
+    document.querySelectorAll('.svc-tab').forEach(function (t) { t.classList.remove('active'); });
+    document.querySelectorAll('.svc-panel').forEach(function (p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
   });
-
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  /* ----- Scroll reveal (IntersectionObserver) ----- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  revealEls.forEach(el => observer.observe(el));
-
-  /* ----- Testimonial slider ----- */
-  const slider = document.getElementById('testimonialSlider');
-  const cards = slider.querySelectorAll('.testimonial-card');
-  const dotsContainer = document.getElementById('sliderDots');
-  let currentIndex = 0;
-  let slidesPerView = window.innerWidth >= 768 ? 3 : 1;
-  let totalPages = Math.ceil(cards.length / slidesPerView);
-
-  function buildDots() {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < totalPages; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function goToSlide(page) {
-    currentIndex = page;
-    const offset = page * slidesPerView * (100 / cards.length);
-    slider.style.transform = `translateX(-${offset}%)`;
-    document.querySelectorAll('.slider-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === page);
-    });
-  }
-
-  document.getElementById('prevBtn').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + totalPages) % totalPages;
-    goToSlide(currentIndex);
-  });
-  document.getElementById('nextBtn').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % totalPages;
-    goToSlide(currentIndex);
-  });
-
-  // Set card widths
-  function initSlider() {
-    slidesPerView = window.innerWidth >= 768 ? 3 : 1;
-    totalPages = Math.ceil(cards.length / slidesPerView);
-    cards.forEach(c => c.style.minWidth = (100 / slidesPerView) + '%');
-    currentIndex = 0;
-    slider.style.transform = 'translateX(0)';
-    buildDots();
-  }
-
-  initSlider();
-  window.addEventListener('resize', initSlider);
-
-  // Auto-advance
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalPages;
-    goToSlide(currentIndex);
-  }, 5000);
-
-  /* ----- Form submission ----- */
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('fname').value.trim();
-    const phone = document.getElementById('fphone').value.trim();
-    const service = document.getElementById('fservice').value;
-    const date = document.getElementById('fdate').value;
-    const time = document.getElementById('ftime').value;
-    const note = document.getElementById('fnote').value.trim();
-
-    if (!name || !phone || !service) {
-      alert('Please fill in your name, phone number, and preferred service.');
-      return;
-    }
-
-    const msg = `Hi Shugar Prestige, I'd like to book an appointment.\n\nName: ${name}\nPhone: ${phone}\nService: ${service}${date ? '\nDate: ' + date : ''}${time ? '\nTime: ' + time : ''}${note ? '\nNotes: ' + note : ''}`;
-    const waUrl = `https://wa.me/6567322298?text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, '_blank');
-  }
-
-  /* ----- Set min date for date input ----- */
-  const dateInput = document.getElementById('fdate');
-  if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-  }
+});
 </script>
+
+<!-- ══════════════ FLOATING WHATSAPP ══════════════ -->
+<a class="wa-float" href="https://wa.me/6589749658?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener" aria-label="Chat with Shugar Prestige on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.19-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.01-1.04 2.470 0 1.45 1.06 2.86 1.21 3.06.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+  <span>WhatsApp us</span>
+</a>
 
 </body>
 </html>
