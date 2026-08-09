@@ -60,7 +60,7 @@ body {
 }
 h1, h2, h3, h4 { font-family: var(--display); font-weight: 300; letter-spacing: -0.01em; margin: 0; }
 p { margin: 0; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 ul { margin: 0; padding: 0; list-style: none; }
 
@@ -353,7 +353,8 @@ footer { border-top: 1px solid var(--border); background: var(--background); }
 .detail-head .promo-tag { display: inline-block; margin-top: 1.5rem; border-radius: 999px; background: var(--accent); color: var(--foreground); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; padding: .4rem .9rem; }
 .detail-head h1 { margin-top: 1.1rem; font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.08; max-width: 18ch; }
 .detail-head .lede { margin-top: 1.35rem; max-width: 38rem; font-size: .95rem; line-height: 1.85; color: var(--ink-soft); }
-.detail-hero img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.detail-hero img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+@media (min-width: 768px) { .detail-hero img { aspect-ratio: 16/9; } }
 .detail-grid { display: grid; gap: 3rem; padding-top: 4rem; padding-bottom: 4rem; }
 .detail-body h2 { font-size: clamp(1.6rem, 3.5vw, 2.25rem); line-height: 1.2; margin-top: 2.75rem; }
 .detail-body h2:first-child { margin-top: 0; }
@@ -365,6 +366,22 @@ footer { border-top: 1px solid var(--border); background: var(--background); }
 .detail-steps li { counter-increment: step; position: relative; padding-left: 3rem; font-size: .88rem; line-height: 1.75; color: var(--ink-soft); }
 .detail-steps li::before { content: counter(step); position: absolute; left: 0; top: -.15rem; width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--border); display: grid; place-items: center; font-family: var(--display); font-size: .95rem; color: var(--primary); }
 .detail-steps li strong { display: block; font-weight: 500; color: var(--foreground); font-size: .92rem; }
+/* price-forward slab */
+.price-slab { background: var(--sand); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.6rem 0 2.4rem; }
+.price-slab .slab-label { text-align: center; font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.slab-prices { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1rem 3.5rem; margin-top: 1.2rem; }
+.slab-price { text-align: center; padding: 0 1rem; }
+.slab-price .amt { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(3.4rem, 12vw, 5.6rem); line-height: .95; color: var(--primary); }
+.slab-price .amt sup { font-size: .42em; vertical-align: super; margin-right: .04em; }
+.slab-price .what { display: block; margin-top: .55rem; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--foreground); }
+.slab-price .per { display: block; margin-top: .3rem; font-size: .74rem; color: var(--ink-soft); }
+.slab-divider { width: 1px; align-self: stretch; background: var(--border); }
+.slab-sub { margin-top: 1.3rem; text-align: center; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #a2453c; font-weight: 700; }
+.slab-benefits { list-style: none; margin: 1.6rem auto 0; padding: 0; display: grid; gap: .55rem; max-width: 44rem; }
+.slab-benefits li { position: relative; padding-left: 1.6rem; font-size: .9rem; line-height: 1.6; }
+.slab-benefits li::before { content: ""; position: absolute; left: 0; top: .34em; width: .62rem; height: .36rem; border-left: 2px solid #6f7f61; border-bottom: 2px solid #6f7f61; transform: rotate(-45deg); }
+.slab-cta { margin-top: 1.9rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+@media (max-width: 640px) { .slab-divider { display: none; } .slab-prices { gap: 1.6rem; } }
 .price-card { border: 1px solid var(--border); background: var(--sand); padding: 2rem 1.75rem; border-radius: 4px; position: sticky; top: 7rem; }
 .price-card .eyebrow { display: block; }
 .price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--border); padding: 1rem 0; }
@@ -433,6 +450,28 @@ footer { border-top: 1px solid var(--border); background: var(--background); }
     <span class="promo-tag">🇸🇬 National Day exclusive</span>
     <h1>SHR hair removal, 12 sessions</h1>
     <p class="lede">Your journey to smoother skin starts here. SHR &mdash; Super Hair Removal &mdash; is an advanced, comfortable and safe technology that uses low-energy, rapid-pulse light to gradually heat the hair follicle and reduce regrowth over time.</p>
+  </div>
+</section>
+
+<section class="price-slab">
+  <div class="container">
+    <p class="slab-label">12 sessions from</p>
+    <div class="slab-prices">
+      <div class="slab-price"><span class="amt"><sup>$</sup>128</span><span class="what">Underarms</span><span class="per">12 sessions &middot; about $10.70 a session</span></div>
+      <div class="slab-divider"></div>
+      <div class="slab-price"><span class="amt"><sup>$</sup>148</span><span class="what">Brazilian</span><span class="per">12 sessions &middot; about $12.30 a session</span></div>
+    </div>
+    <p class="slab-sub">🇸🇬 National Day exclusive &middot; while slots last</p>
+    <ul class="slab-benefits">
+      <li>Painless, low-energy rapid-pulse technology &mdash; no downtime</li>
+      <li>Safe on sensitive areas and every skin tone</li>
+      <li>Visibly less regrowth, session after session</li>
+      <li>Personalised plan set by trained specialists</li>
+    </ul>
+    <div class="slab-cta">
+      <a class="btn btn-wa" href="https://wa.me/6589524528?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20the%20National%20Day%20SHR%20promotion%3A%20Underarm%20hair%20removal%20-%2012%20sessions%20for%20%24128.%20May%20I%20know%20your%20available%20slots%3F" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.19-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.01-1.04 2.47 0 1.45 1.06 2.86 1.21 3.06.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg><span>Book underarms &mdash; $128</span></a>
+      <a class="btn btn-wa" href="https://wa.me/6589524528?text=Hi%20Shugar%20Prestige%2C%20I%27d%20like%20to%20book%20the%20National%20Day%20SHR%20promotion%3A%20Brazilian%20hair%20removal%20-%2012%20sessions%20for%20%24148.%20May%20I%20know%20your%20available%20slots%3F" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.19-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.01-1.04 2.47 0 1.45 1.06 2.86 1.21 3.06.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg><span>Book Brazilian &mdash; $148</span></a>
+    </div>
   </div>
 </section>
 
